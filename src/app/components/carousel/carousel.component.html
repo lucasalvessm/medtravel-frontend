@@ -1,0 +1,7 @@
+<ngb-carousel *ngIf="images" [pauseOnHover]="true">
+    <ng-template ngbSlide *ngFor="let image of images">
+        <div class="picsum-img-wrapper">
+            <img [src]="image" class="card-img-top" alt="Image of a medicine">
+        </div>
+    </ng-template>
+</ngb-carousel>

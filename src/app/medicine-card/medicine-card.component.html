@@ -1,0 +1,9 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{medicineLight.fantasyName}}</h5><a href="" (click)="openDetail($event)">Detail</a>
+        <div id="inline-reset"></div>
+        <app-medicine-data-content [medicine]="medicineLight">
+        </app-medicine-data-content>
+    </div>
+    <app-carousel [images]="medicineLight.images"></app-carousel>
+</div>

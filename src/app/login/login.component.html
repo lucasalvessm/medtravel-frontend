@@ -1,0 +1,17 @@
+<div class="text-center">
+    <form class="form-signin" [formGroup]="loginForm" (submit)="doLogin()">
+        <div id="form-inputs">
+            <i class="material-icons">home</i>
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <label for="inputUser" class="sr-only">User</label>
+            <input type="text" class="form-control" placeholder="User" formControlName="user" autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" class="form-control" placeholder="Password" formControlName="password">
+            <br>
+            <button [disabled]="!loginForm.valid" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <div class="invalid-feedback {{feedback}}">
+                Invalid user or password.    
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,44 @@
+<div *ngIf="medicine" class="modal-header">
+    <h4 class="modal-title">{{medicine.fantasyName}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <app-medicine-data-content [medicine]="medicine">
+        <div class="row">
+            <div class="col-md-6 col-6">
+                <span>CNPJ</span>
+                <p class="card-text">{{medicine.cnpj}}</p>
+            </div>
+            <div class="col-md-6 col-6">
+                <span>Activities</span>
+                <p class="card-text">{{medicine.activities}}</p>
+            </div>
+            <div class="col-md-6 col-6">
+                <span>Teaching Method</span>
+                <p class="card-text">{{medicine.teachingMethod}}</p>
+            </div>
+            <div class="col-md-6 col-6">
+                <span>Address</span>
+                <p class="card-text">{{address.address}}</p>
+            </div>
+            <div class="col-md-6 col-6">
+                <span>Neighborhood</span>
+                <p class="card-text">{{address.neighborhood}}</p>
+            </div>
+            <div class="col-md-6 col-6">
+                <span>City</span>
+                <p class="card-text">{{address.city}}</p>
+            </div>
+        </div>
+    </app-medicine-data-content>
+    <div *ngIf="medicine.images">
+        <h4>Medicine Images</h4>
+        <div id="align-carousel">
+            <app-carousel [images]="medicine.images"></app-carousel>
+        </div>
+
+    </div>
+
+</div>

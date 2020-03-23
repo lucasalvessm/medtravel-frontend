@@ -1,0 +1,52 @@
+<h1>Medicine</h1>
+<form [formGroup]="medicineForm" (ngSubmit)="onSubmit(upload)">
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label for="fantasyName">*Fantasy Name</label>
+            <input type="text" class="form-control" formControlName="fantasyName">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="openingHours">*Opening Hours</label>
+            <input type="text" class="form-control" formControlName="openingHours">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="price">*Price</label>
+            <input type="text" class="form-control"  mask='dot_separator.2' formControlName="price">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="activities">Activities</label>
+            <input type="text" class="form-control" formControlName="activities">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="teachingMethod">Teaching Method</label>
+            <input type="text" class="form-control" formControlName="teachingMethod">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="cnpj">CNPJ</label>
+            <input type="text" class="form-control" formControlName="cnpj">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" formControlName="address">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="neighborhood">Neighborhood</label>
+            <input type="text" class="form-control" formControlName="neighborhood">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="city">City</label>
+            <input type="text" class="form-control" formControlName="city">
+        </div>
+    </div>
+    <app-file-upload #upload [onCallback]="handleCallback" uploadTitle="Medicine Images">
+    </app-file-upload>
+    <br>
+
+    <hr class="mb-4">
+    <button [disabled]="!medicineForm.valid" class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
+</form>
+<app-toasts></app-toasts>
