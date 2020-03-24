@@ -6,9 +6,11 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./carousel.component.less']
 })
 export class CarouselComponent implements OnInit {
+  showNavigationIndicators = false;
+  showNavigationArrows = false;
 
   @Input()
-  public images: string[];
+  public image: string;
 
   constructor() { }
 

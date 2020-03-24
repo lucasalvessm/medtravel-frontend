@@ -1,45 +1,49 @@
 <h1>Medicine</h1>
 <form [formGroup]="medicineForm" (ngSubmit)="onSubmit(upload)">
     <div class="row">
-        <div class="col-md-4 mb-3">
-            <label for="fantasyName">*Fantasy Name</label>
-            <input type="text" class="form-control" formControlName="fantasyName">
+        <div class="col-md-6 mb-3">
+            <label for="name">*Name</label>
+            <input type="text" class="form-control" formControlName="name">
         </div>
-        <div class="col-md-4 mb-3">
-            <label for="openingHours">*Opening Hours</label>
-            <input type="text" class="form-control" formControlName="openingHours">
+        <div class="col-md-6 mb-3">
+            <label for="description">*Description</label>
+            <input type="text" class="form-control" formControlName="description">
         </div>
-        <div class="col-md-4 mb-3">
-            <label for="price">*Price</label>
-            <input type="text" class="form-control"  mask='dot_separator.2' formControlName="price">
-        </div>
-        <div class="col-md-4 mb-3">
-            <label for="activities">Activities</label>
-            <input type="text" class="form-control" formControlName="activities">
-        </div>
-        <div class="col-md-4 mb-3">
-            <label for="teachingMethod">Teaching Method</label>
-            <input type="text" class="form-control" formControlName="teachingMethod">
-        </div>
-        <div class="col-md-4 mb-3">
-            <label for="cnpj">CNPJ</label>
-            <input type="text" class="form-control" formControlName="cnpj">
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-12 mb-3">
-            <label for="address">Address</label>
-            <input type="text" class="form-control" formControlName="address">
+            <label for="composition">Composition</label>
+            <textarea class="form-control" rows="2" formControlName="composition"></textarea>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label for="posology">Posology</label>
+            <textarea class="form-control" rows="3" formControlName="posology"></textarea>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label for="leaflet">Leaflet</label>
+            <textarea class="form-control" rows="10" formControlName="leaflet"></textarea>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="neighborhood">Neighborhood</label>
-            <input type="text" class="form-control" formControlName="neighborhood">
+    <div class="col-md-3 mb-3">
+        <button (click)="addCountry()" type="button" class="btn btn-outline-primary">Allowed Countries</button>
+    </div>
+    <div class="row" *ngFor="let address of addressList">
+        <div class="col-md-4 mb-3">
+            <label for="country">Country</label>
+            <input [(ngModel)]="address.country" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
         </div>
-        <div class="col-md-6 mb-3">
+        <div class="col-md-3 mb-3">
+            <label for="state">State</label>
+            <input [(ngModel)]="address.state" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+        </div>
+        <div class="col-md-3 mb-3">
             <label for="city">City</label>
-            <input type="text" class="form-control" formControlName="city">
+            <input [(ngModel)]="address.city" [ngModelOptions]="{standalone: true}" type="text" class="form-control">
+        </div>
+        <div class="col-md-1 mb-3">
+            <label for="city">Valid On</label>
+            <input [(ngModel)]="address.validOn" [ngModelOptions]="{standalone: true}" type="text" class="form-control" maxlength="1">
+        </div>
+        <div class="col-md-1 mb-3">
+            <a (click)="removeAddress($event, address)" href="#">remove</a>
         </div>
     </div>
     <app-file-upload #upload [onCallback]="handleCallback" uploadTitle="Medicine Images">

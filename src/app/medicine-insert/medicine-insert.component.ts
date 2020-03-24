@@ -4,6 +4,7 @@ import { MedicineService } from '../commons/service/medicine.service';
 import { Medicine } from '../commons/model/medicine.model';
 import { ToastService } from '../components/toast/toast.service';
 import { FileUploadComponent } from '../components/file-upload/file-upload.component';
+import { Address } from '../commons/model/address.model';
 
 
 @Component({
@@ -15,18 +16,15 @@ export class MedicineInsertComponent implements OnInit {
 
   handleCallback: Function;
 
-  images: string[] = [];
+  image: string;
+  addressList: Address[] = [];
 
   medicineForm = this.fb.group({
-    fantasyName: ['', Validators.required],
-    openingHours: ['', Validators.required],
-    price: ['', Validators.required],
-    activities: [''],
-    teachingMethod: [''],
-    cnpj: [''],
-    address: [''],
-    city: [''],
-    neighborhood: ['']
+    name: ['', Validators.required],
+    description: ['', Validators.required],
+    composition: [''],
+    posology: [''],
+    leaflet: ['']
   });
 
   constructor(
@@ -34,24 +32,33 @@ export class MedicineInsertComponent implements OnInit {
     private medicineService: MedicineService,
     private toastService: ToastService
   ) {
-    this.handleCallback = this.getImages.bind(this);
+    this.handleCallback = this.getImage.bind(this);
   }
 
   ngOnInit() {
   }
 
-  onSubmit = (upload: FileUploadComponent) =>
+  onSubmit = (upload: FileUploadComponent) => {
     this.medicineService
-      .insert(Medicine.fromForm(this.medicineForm.value, this.images))
-      .subscribe(
-        () => {
-          this.medicineForm.reset();
-          upload.resetSelection();
-          this.toastService.success('Medicine inserted successfully');
-        },
-        res => this.toastService.error(`Medicine not inserted successfully. Error: ${res.error.message}`)
-      );
+    .insert(Medicine.fromForm(this.medicineForm.value, this.image, this.addressList))
+    .subscribe(
+      () => {
+        this.medicineForm.reset();
+        upload.resetSelection();
+        this.toastService.success('Medicine inserted successfully');
+      },
+      res => this.toastService.error(`Medicine not inserted successfully. Error: ${res.error.message}`)
+    );
+  }
+    
 
-  getImages = (images: string[]) => this.images = images;
+  getImage = (image: string) => this.image = image;
+
+  addCountry = () => this.addressList.push(new Address());
+
+  removeAddress = (event: Event, address: Address) => {
+    event.preventDefault();
+    this.addressList = this.addressList.filter(add => add !== address);
+  }
 
 }

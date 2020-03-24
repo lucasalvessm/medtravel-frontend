@@ -1,5 +1,6 @@
-export class Address { 
-    address: string;
+export class Address {
+    country: string;
+    state: string;
     city: string;
-    neighborhood: string;
+    validOn: string;
 }

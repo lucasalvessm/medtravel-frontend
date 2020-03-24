@@ -14,7 +14,7 @@ export class FileUploadComponent implements OnInit {
   @Input()
   public uploadTitle: string;
 
-  images: string[] = [];
+  image: string;
 
   constructor() { }
 
@@ -26,28 +26,27 @@ export class FileUploadComponent implements OnInit {
     .values(files)
     .forEach((value: File) =>
       getImgUrlByFile(value, (e: any) => {
-        this.images.push(e.target.result)
+        this.image = e.target.result;
         this.doCallback();
       }));
   }
 
   resetSelection = () => {
-    this.images = [];
+    this.image = undefined;
     this.doCallback();
   }
     
 
   cleanValue = (el: any) => el.value = null
 
-  removeImageFromList = (event: Event, image: string) => {
+  removeImageFromList = (event: Event) => {
     event.preventDefault();
-    this.images = this.images.filter(img => img !== image);
+    this.image = undefined;
     this.doCallback();
   }
 
 
   private doCallback() {
-    //this.onCallback(this.images.map(image => image));
-    this.onCallback(this.images.map(image => getBase64FromImageURL(image)));
+    this.onCallback(getBase64FromImageURL(this.image));
   }
 }
